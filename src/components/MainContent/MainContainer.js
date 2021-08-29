@@ -8,9 +8,9 @@ const MainContainer = () => {
             {sectionsData.map(({ sectionTitle, dishesFood }, index) => {
                 return <Section key={index} sectionTitle={sectionTitle} dishesData={dishesFood} />
             })}
-            
         </div>
     )
 }
+
 
 export default MainContainer

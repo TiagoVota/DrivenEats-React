@@ -1,9 +1,3 @@
-export const sectionTitles = [
-    'Primeiro, seu prato',
-    'Agora, sua bebida',
-    'Por fim, sua sobremesa'
-]
-
 const dishesFood = [
     {
         imgSrc: './assets/food1-macarrao-italiano.jpg',
