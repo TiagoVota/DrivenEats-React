@@ -18,12 +18,18 @@ const Footer = ({ orderList }) => {
     }
 
     useEffect(verifyAllSelected, orderList)
+
+    const handleClick = () => {
+        if (areAllSelected) {
+            
+        }
+    }
     
     return (
         <div className="footer">
             <button
                 className={`ready-to-finalize-button ${areAllSelected ? 'ready-to-finalize-order' : ''}`}
-                onclick="send_to_final_screen(this)"
+                onclick={handleClick}
             >
                 {areAllSelected ? readyToFinalizeText : notReadyToFinalizeText}
             </button>

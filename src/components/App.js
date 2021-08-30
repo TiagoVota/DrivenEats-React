@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import Header from './Header'
-import Footer from './Footer'
 import Section from './MainContent/Section'
+import Footer from './Footer'
+import FinalizeOrder from './FinalizeOrder'
 import { sectionsData } from './MainContent/SectionsData'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 
 const App = () => {
@@ -27,28 +29,22 @@ const App = () => {
         [selectedDessert, setSelectedDessert]
     ]
 
-    const orderList = [
-        selectedFood,
-        selectedDrink,
-        selectedDessert
-    ]
+    const orderList = dishesStates.map(order => order[0])
 
 	return (
 		<>
 			<Header />
 
             <div className="container">
-                <div>
-                    <p>{['qtd    ', selectedFood.qtd]}</p>
-                    <p>{['index    ', selectedFood.selectedIndex]}</p>
-                </div>
-                {sectionsData.map(({ sectionTitle, dishesFood }, index) => <Section
+                {sectionsData.map(({ sectionTitle, dishes }, index) => <Section
                     key={index}
                     sectionTitle={sectionTitle}
-                    dishesData={dishesFood}
+                    dishesData={dishes}
                     dishesState={dishesStates[index]}
                 />)}
             </div>
+
+            <FinalizeOrder orderList={orderList}/>
 
             <Footer orderList={orderList}/>
 		</>

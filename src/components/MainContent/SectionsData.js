@@ -115,14 +115,14 @@ const dishesDessert = [
 export const sectionsData = [
     {
         sectionTitle: 'Primeiro, seu prato',
-        dishesFood: dishesFood
+        dishes: dishesFood
     },
     {
         sectionTitle: 'Agora, sua bebida',
-        dishesFood: dishesDrink
+        dishes: dishesDrink
     },
     {
         sectionTitle: 'Por fim, sua sobremesa',
-        dishesFood: dishesDessert
+        dishes: dishesDessert
     }
 ]
