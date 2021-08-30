@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/DrivenEats-React/static/css/main.71221ce2.chunk.css",
+    "main.js": "/DrivenEats-React/static/js/main.381d7f60.chunk.js",
+    "main.js.map": "/DrivenEats-React/static/js/main.381d7f60.chunk.js.map",
+    "runtime-main.js": "/DrivenEats-React/static/js/runtime-main.152e8a43.js",
+    "runtime-main.js.map": "/DrivenEats-React/static/js/runtime-main.152e8a43.js.map",
+    "static/js/2.31f07412.chunk.js": "/DrivenEats-React/static/js/2.31f07412.chunk.js",
+    "static/js/2.31f07412.chunk.js.map": "/DrivenEats-React/static/js/2.31f07412.chunk.js.map",
+    "index.html": "/DrivenEats-React/index.html",
+    "static/css/main.71221ce2.chunk.css.map": "/DrivenEats-React/static/css/main.71221ce2.chunk.css.map",
+    "static/js/2.31f07412.chunk.js.LICENSE.txt": "/DrivenEats-React/static/js/2.31f07412.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.152e8a43.js",
+    "static/js/2.31f07412.chunk.js",
+    "static/css/main.71221ce2.chunk.css",
+    "static/js/main.381d7f60.chunk.js"
+  ]
+}

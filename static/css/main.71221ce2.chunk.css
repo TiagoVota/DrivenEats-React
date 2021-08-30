@@ -1,0 +1,2 @@
+.dish:not(.selected-dish) .dish-counter{display:none}.dish-counter{width:47px;height:19px;position:absolute;right:calc(11px - var(--selection-border));bottom:calc(14px - var(--selection-border));display:flex;justify-content:space-between;font-size:16px}.minus{color:#cf2b2b}.plus{color:#32b72f}
+/*# sourceMappingURL=main.71221ce2.chunk.css.map */
