@@ -1,10 +1,7 @@
+import { useHistory } from 'react-router-dom'
 import { sectionsData } from './MainContent/SectionsData'
 
 const FinalizeOrder = ({ orderList }) => {
-    // APAGAR ISSO AQUI DEPOIS
-    const IN_TEST = (boolean) => (boolean ? '' : 'hidden')
-
-
     const createCardList = (cardData) => {
         return cardData.map((order, index) => createCardItem(order, index))
     }
@@ -19,8 +16,8 @@ const FinalizeOrder = ({ orderList }) => {
     }
 
     const createCardData = (orderList) => {
-        return orderList.map((order, index) => createItemData({qtd:3, selectedIndex:1}, index))
-        // return orderList.map((order, index) => createItemData(order, index))
+        return orderList.map((order, index) => createItemData(order, index))
+        // return orderList.map((order, index) => createItemData({qtd:3, selectedIndex:1}, index))
     }
 
     const createItemData = ({ qtd, selectedIndex }, index) => {
@@ -50,10 +47,11 @@ const FinalizeOrder = ({ orderList }) => {
 
 
     const cardData = createCardData(orderList)
+    const history = useHistory()
 
 
     return (
-        <div className={`finalize-order-screen ${IN_TEST(true)}`}>
+        <div className={`finalize-order-screen`}>
             <div className="finalize-order-menu">
                 <p>Confirme seu pedido</p>
 
@@ -68,9 +66,15 @@ const FinalizeOrder = ({ orderList }) => {
                         </p>
                     </div>
                 </div>
+                
+                <button className="send-order-button">
+                    Tudo certo, pode pedir!
+                </button>
 
-                <button className="send-order-button" onclick="send_message_whatsapp()">Tudo certo, pode pedir!</button>
-                <button className="cancel-button" onclick="change_visibility_final_screen()">Cancelar</button>
+                <button className="cancel-button" onClick={() => history.push('/')}>
+                    Cancelar
+                </button>
+
             </div>
         </div>
     )

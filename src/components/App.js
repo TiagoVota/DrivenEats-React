@@ -1,10 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { sectionsData } from './MainContent/SectionsData'
+import {
+    Link, 
+    BrowserRouter as Router,
+    Route,
+    Switch
+} from 'react-router-dom'
 import Header from './Header'
-import Section from './MainContent/Section'
+import MainContainer from './MainContent/MainContainer'
 import Footer from './Footer'
 import FinalizeOrder from './FinalizeOrder'
-import { sectionsData } from './MainContent/SectionsData'
-import { BrowserRouter as Router } from 'react-router-dom'
 
 
 const App = () => {
@@ -31,22 +36,44 @@ const App = () => {
 
     const orderList = dishesStates.map(order => order[0])
 
+
+    const [ areAllSelected, setAreAllSelected ] = useState(false)
+    
+    const verifyAllSelected = () => {
+        const newList = orderList.filter((order) => order.qtd > 0)
+        if (newList.length === orderList.length) {
+            setAreAllSelected(true)
+            return
+        } else {
+            setAreAllSelected(false)
+        }
+    }
+
+    useEffect(verifyAllSelected, orderList)
+
 	return (
 		<>
 			<Header />
 
-            <div className="container">
-                {sectionsData.map(({ sectionTitle, dishes }, index) => <Section
-                    key={index}
-                    sectionTitle={sectionTitle}
-                    dishesData={dishes}
-                    dishesState={dishesStates[index]}
-                />)}
-            </div>
+            <Router>
+                <Switch>
+                    <Route path='/' exact>
+                        <MainContainer
+                            sectionsData={sectionsData}
+                            dishesStates={dishesStates}
+                        />
+                    </Route>
 
-            <FinalizeOrder orderList={orderList}/>
+                    <Route path='/revisar'>
+                        <FinalizeOrder orderList={orderList}/>
+                    </Route>
+                </Switch>
+                
+                <Link className={areAllSelected ? '' : 'disable-link'} to='/revisar'>
+                    <Footer areAllSelected={areAllSelected}/>
+                </Link>
+            </Router>
 
-            <Footer orderList={orderList}/>
 		</>
 	)
 }
