@@ -1,3 +1,15 @@
+# Sobre esse projeto
+
+## Descrição
+
+Aplicação React direcionada para o mobile que simula um App de entregas. Nessa aplicação foram utilizados conceitos de componentização e Hooks do React.
+
+Na tela inicial do aplicativo há três classes de pratos: Comidas, bebidas e sobremesas. Pode ser selecionada exatamente uma opção de cada classe, porém pode escolher mais do que uma quantidade do item por vez. Após selecionadas todas as opções o usuário segue para a tela de confirmação do pedido. Caso esteja tudo certo, ele será redirecionado para uma conversa pelo WhatsApp com o estabelecimento para enviar a ordem do pedido!
+
+## Acesso
+
+Essa aplicação pode ser acessada através [GitHub Pages](https://tiagovota.github.io/DrivenEats-React/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
