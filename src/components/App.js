@@ -13,6 +13,7 @@ import FinalizeOrder from './FinalizeOrder'
 
 
 const App = () => {
+    // Relacionados com informações do pedido
     const [ selectedFood, setSelectedFood ] = useState({
         qtd: 0,
         selectedIndex: -1
@@ -37,6 +38,7 @@ const App = () => {
     const orderList = dishesStates.map(order => order[0])
 
 
+    // Relacionados com validação do pedido
     const [ areAllSelected, setAreAllSelected ] = useState(false)
     
     const verifyAllSelected = () => {
@@ -50,6 +52,7 @@ const App = () => {
     }
 
     useEffect(verifyAllSelected, orderList)
+
 
 	return (
 		<>
@@ -65,15 +68,14 @@ const App = () => {
                     </Route>
 
                     <Route path='/revisar'>
-                        <FinalizeOrder orderList={orderList}/>
+                        <FinalizeOrder orderList={orderList} />
                     </Route>
                 </Switch>
                 
                 <Link className={areAllSelected ? '' : 'disable-link'} to='/revisar'>
-                    <Footer areAllSelected={areAllSelected}/>
+                    <Footer areAllSelected={areAllSelected} />
                 </Link>
             </Router>
-
 		</>
 	)
 }

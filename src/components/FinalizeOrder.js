@@ -2,11 +2,13 @@ import { useHistory } from 'react-router-dom'
 import { sectionsData } from './MainContent/SectionsData'
 
 const FinalizeOrder = ({ orderList }) => {
-    const createCardList = (cardData) => {
-        return cardData.map((order, index) => createCardItem(order, index))
+    // Trabalhar com a lista de itens
+    const createCartList = (cartData) => {
+        return cartData.map((order, index) => createCartItem(order, index))
     }
 
-    const createCardItem = ({ dishTitle, totalDishPrice }, index) => {
+
+    const createCartItem = ({ dishTitle, totalDishPrice }, index) => {
         return (
             <div key={index} className="order-detail">
                 <p>{dishTitle}</p>
@@ -15,10 +17,11 @@ const FinalizeOrder = ({ orderList }) => {
         )
     }
 
-    const createCardData = (orderList) => {
+
+    const createCartData = (orderList) => {
         return orderList.map((order, index) => createItemData(order, index))
-        // return orderList.map((order, index) => createItemData({qtd:3, selectedIndex:1}, index))
     }
+
 
     const createItemData = ({ qtd, selectedIndex }, index) => {
         const { dishes } = sectionsData[index]
@@ -33,7 +36,6 @@ const FinalizeOrder = ({ orderList }) => {
     }
 
 
-    // É melhor colocar essas duas funções aqui mesmo, dentro da createCardData ou aonde?
     const currencyToNumber = (currency) => {
         currency = currency.replace('R$ ', '')
         currency = currency.replace(',', '.')
@@ -43,12 +45,64 @@ const FinalizeOrder = ({ orderList }) => {
 
     const numberToCurrency = (number) => {
         return number.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+    }    
+
+
+    // Criando data
+    const cartData = createCartData(orderList)
+    const totalValueCurrency = numberToCurrency(cartData.reduce((total, { totalDishPrice }) => {
+        return total + totalDishPrice
+    }, 0))
+
+    const history = useHistory()
+
+
+    // Envio para o WhatsApp
+    const sendMessageWhatsapp = () => {
+        const name = prompt('Qual o seu nome?')
+        const address = prompt('Qual o endereço de entrega?')
+    
+        const textOrder = makeOrderMessage(name, address, cartData)
+    
+        const whatsappLink = linkToWhatsapp('5547992312249', textOrder)
+    
+        window.open(whatsappLink)
     }
 
 
-    const cardData = createCardData(orderList)
-    const history = useHistory()
+    const makeOrderMessage = (name, address, cartData) => {
+        if (name === null || name === '') {
+            name = 'Um fora da lei >.<'
+        }
+        if (address === null || address === '') {
+            address = 'Um lugar fantasma u.u'
+        }
 
+        let dishesText = cartData.map(({ dishTitle, totalDishPrice }) => {
+            return `\n- *${dishTitle}*: ${numberToCurrency(totalDishPrice)}`
+        })
+        dishesText = dishesText.reduce((total, value) => total + value, '')
+    
+        const textOrder = `Olá, gostaria de fazer o pedido:
+        ${dishesText}
+        *Total*: ${totalValueCurrency}
+
+        *Nome*: ${name}
+        *Endereço*: ${address}`.replaceAll('    ', '')
+        
+        return textOrder
+    }
+    
+    
+    const linkToWhatsapp = (restaurantTextNumber, textOrder) => {
+        const baseUrl = 'https://wa.me/'
+    
+        const textUrl = encodeURIComponent(textOrder)
+    
+        const finalUrl = baseUrl + restaurantTextNumber + '?text=' + textUrl
+        
+        return finalUrl
+    }
 
     return (
         <div className={`finalize-order-screen`}>
@@ -56,18 +110,16 @@ const FinalizeOrder = ({ orderList }) => {
                 <p>Confirme seu pedido</p>
 
                 <div className="order-details">
-                    {createCardList(cardData)}
+                    {createCartList(cartData)}
                     <div className="order-detail order-detail-total">
                         <p>Total</p>
                         <p>
-                            {numberToCurrency(cardData.reduce((total, { totalDishPrice }) => {
-                                return total + totalDishPrice
-                            }, 0))}
+                            {totalValueCurrency}
                         </p>
                     </div>
                 </div>
                 
-                <button className="send-order-button">
+                <button className="send-order-button" onClick={sendMessageWhatsapp}>
                     Tudo certo, pode pedir!
                 </button>
 
